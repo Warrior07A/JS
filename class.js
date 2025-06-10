@@ -1,3 +1,4 @@
+
 //classes
 //**promises is also a class that's why we are learning it here!!!! */
 // In JS cLASSES are a way to define blueprint  for creating objects
@@ -84,3 +85,58 @@ async function main(){                                         //writing of an a
 
 main();
 console.log("pehle mein");                                        // since its not an async code it will print first
+
+
+//doc link :"https://projects.100xdevs.com/tracks/promises-async-await/Promises-and-async--await-1"
+
+
+//promise based approach
+function setTimepromisified(delay){
+    return new Promise((resolve)=>{
+        setTimeout(resolve,delay);
+    })
+    }
+  ///                                                   can also be written 
+//Q1 PRINT HI THERE AFTER 1S AND HELLO AFTER 2SEC
+setTimepromisified(1000)                               // const p=setTimepromisified(1000)
+    .then(function(){                                  // p.then.....
+        console.log("HI THERE");
+    })                         
+
+setTimepromisified(2000)
+    .then(function(){
+        console.log("HELLO");
+    })
+        
+//Q2 PRINT HI THERE AFTER 1S AND JUST AFTER 1ST TASK EXCEUTES PRINT HELLO AFTER 5 MORE SEC
+
+setTimepromisified(1000)
+    .then(function(){
+        console.log("HI THERE");
+    })
+    .then(()=>{
+        setTimeout(()=>{
+            console.log("HELLO")
+        },5000)
+    })
+
+
+//Q3 Start two promises (one for 1s, one for 2s) together ,
+//When both are done print both are done on the screen
+
+let d1=6000;
+let d2=4000;
+let done=0;
+ setTimepromisified(d1)
+    .then(()=>{
+        console.log(d1+"secs have passed")
+        done+=1;
+        if (done==2)  console.log("BOTH ARE DONE");            //HERE KEY LEARNI..(dont compare time ,
+    })                                                      //comapare which one has been logged first)
+setTimepromisified(d2)                        
+    .then(()=>{
+        console.log(d2+"secs have passed");
+        done+=1;
+        if (done==2) console.log("both are done");  
+    })
+    
