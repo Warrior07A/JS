@@ -117,6 +117,7 @@ function callback(error,content){                   //if used as a callback
 
 
 //UNDESTANDING ASYNC A BIT MORE DEEP
+
 //JS ARCHITECTURE                                                                    //JS IS SINGLE THREADED LANG
 
 setTimeout(() => {
