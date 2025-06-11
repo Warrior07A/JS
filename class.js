@@ -128,7 +128,7 @@ let d1=6000;
 let d2=4000;
 let done=0;
  setTimepromisified(d1)
-    .then(()=>{
+    .then(()=>{  
         console.log(d1+"secs have passed")
         done+=1;
         if (done==2)  console.log("BOTH ARE DONE");            //HERE KEY LEARNI..(dont compare time ,
@@ -140,3 +140,87 @@ setTimepromisified(d2)
         if (done==2) console.log("both are done");  
     })
     
+
+
+//Q4 Create a function called (all) tht takes an array of promises as an input. It also takes a call back fn as an input.
+//It calls the callback fn whenever all the promises have been resolved!
+                                                                    //ITS AN INTERVIEW QUES :)
+function setTimepromisified(delay){
+    return new Promise((resolve)=>{
+        setTimeout(resolve,delay);
+    })
+    }
+
+var p1=setTimepromisified(1000).then(function () {           //resolving promise 1
+    console.log("promise 1 is done");
+})
+
+var p2=setTimepromisified(3000).then(function () {           //resolving p2
+    console.log("Promise 2 is done");
+})
+
+all([p1,p2],function(){
+    console.log("All promises are resolved");
+} )
+
+function all(promise,callback){
+    var done=0;
+    PROMISE_TOTAL=promise.length;                                    //finding no of promises
+    if (PROMISE_TOTAL==0) {                                      //edge case in case of no promises
+        callback()
+    }
+    for (var i=0;i<PROMISE_TOTAL;i++){                                 
+        promise[i].then(function(){
+          done+=1;
+          if(done==PROMISE_TOTAL){                                      //MAKE SURE TO GET THIS IN .THEN only then it will check
+            callback();                                             //every time it'll check a new promise 
+            }                                                        //counting and then matching with total nooof promises
+               })
+          
+    }
+}
+
+//create a fn called one which resolves when any one of the promise get resolved!
+
+function setTimepromisified(delay){
+    return new Promise((resolve)=>{
+        setTimeout(resolve,delay);
+    })
+    }
+
+
+var p1=setTimepromisified(1000).then(function(){
+    console.log("promise 1 is resolved");
+
+})
+
+var p2=setTimepromisified(3000).then(function(){
+    console.log("promise 2 is resolved");
+
+})
+
+one([p1,p2],function(){
+    console.log("promise is resolved");
+})
+
+function one(promise,callback){
+    TOTAL_PROMISE=promise.length;
+    var done=0;
+    for (var i=0;i<TOTAL_PROMISE;i++){
+        promise[i].then(function(){
+            done+=1;
+        if (done==1){
+        callback();
+        }
+        })
+        
+    }
+}
+
+//actually what we did in upper assignment has been a functio [promise.all]
+//we created one for ourselves actually and yeah we r good
+//how it works!!
+
+Promise.all([p1,p2,]).then(()=>{
+    console.log("all are done");
+})
