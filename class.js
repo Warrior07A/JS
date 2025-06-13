@@ -38,7 +38,7 @@ console.log(maps.get('name'));
 console.log(maps.get('age'));
 
 
-//Promises
+//||||||||||||||||||||||||||||||||||||||||||||||   P  R  O  M  I  S  E S||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 function newfn(){
 
 }
