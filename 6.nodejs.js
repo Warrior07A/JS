@@ -8,7 +8,9 @@
 
 //after installing npm and node successfully
 
-//step 1 npm init  ->> package.json file got added
+// go for npm install node
+
+//step 2 npm init  ->> package.json file got added
 // (whenevr using node in any foldder for backend operations)!
 
 
