@@ -126,3 +126,34 @@ async function abcd(){
 }
 
 abcd();
+
+
+//SOEMTHING INTERESTTING!!
+
+//async await is just  a syntactic sugar for .then syntax
+//both fn's work exact same 
+
+async function getRecentPost(){
+  console.log("before sending request");
+  const response =await fetch("https://jsonplaceholder.typicode.com/posts/1")
+  const data=await response.json();
+  console.log(data);
+  console.log("your request has been proceessed");       //this wont log first as async await work in such a manner only 
+  document.getElementById("posts").innerHTML=data.body
+}
+
+async function getRecentPost(){
+  console.log("before sending request");
+  await fetch("https://jsonplaceholder.typicode.com/posts/1")
+    .then(function(response){
+      response.json().then(function(data){
+        console.log(data);
+        console.log("requesr has been proccessed");         //just like here
+        document.getElementById("posts").innerHTML=data.body
+})
+      })
+    }
+
+
+
+
