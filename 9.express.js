@@ -64,8 +64,8 @@ app.listen(3000);
 const express=require("express");
 const app=express()
 
-app.use(express.json())                     //used a middleware here idk why will be told soon 
-
+app.use(express.json())                     //express.json is a fn which returns anther fn that's why [called] it
+                                    //it is a middleware u have to use whnever dealing with json in body in postman
 const users=[{                       //it is an array of user object
     name:"John",                     //john is a dummy user of our hospital
     kidneys:[{
