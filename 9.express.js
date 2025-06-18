@@ -46,12 +46,12 @@ function sum(n){
 
 app.get('/',function(req,res){
     const n = req.query.a;                ///getting inputs by query    
-    const ans=sum(n);                      //localhost:3000?a=10
+    const ans=sum(n);                      //localhost:3000?a=10         
     res.send("hi your sum till then is "+ ans);
 })
 
 app.listen(3000);
-
+//there's one other way of sending input via get (see i HTMLSERVER FOLDER)
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 //REQUEST METHODS
 // 1.POST(ADD)    2.DELETE    3.PUT(UPDATE)      4.GET
