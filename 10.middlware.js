@@ -61,7 +61,10 @@ app.get("/ride2",function(req,res){
     res.send("you rode ride no 2");
 })
 
+//ERROR HANDLING MIDDLEWARE 
+app.use(err,req,res,next){         //diff is it has just 4 parameters and is usually put at last to get all possible err
+    res.status(404).send({});                                      //if any error occurs u can send a suitable error code
+}                                                               //to client side and not a big jibrish!
 
-
-app.listen(3000);
+app.listen(3000);   
 
