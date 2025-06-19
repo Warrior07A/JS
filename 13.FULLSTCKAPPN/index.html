@@ -1,0 +1,35 @@
+<head>
+    </head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js">
+        async function ADDVALUE(){
+            const response =await axios.post("http://localhost:3000/sum",{
+                a:document.getElementById("a").value,
+                b:document.getElementById("b").value
+            })
+        }
+    </script>
+    <body>
+        
+        <input id="a" type="text" placeholder="Enter first value"></input>
+        <input id="b" type="text" placeholder="Enter second value"></input>
+        
+
+        <button onclick="ADDVALUE()">SUM </button>
+    </body>
+
+    <!--now i have written code for fornt end and backend. Starting backend as well but how to host front end??
+     for that we need to make our frontend go online on INTRANET 
+
+     MAKING OUR FILES GO ONLINE ~ SERVING/HOSTING OUR FILES ON HTTP
+     FOR THAT YOU NEED TO HAVE PYTHON INSTALLLED AND GO TO FOLDER YOU WANNA HOST
+     RUN(npx serve)                serves the files on HTTP
+     we did this so that we can get an easy domain address of frontend!
+
+     start both on diff terminal by node index.js      and        npx serve         from same directory
+      
+
+
+     //if you send req they ll be blocked by CORS but you can send and recieve answers successfully by postman 
+     since vulnerability exists only in browsers!
+
+    
