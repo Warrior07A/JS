@@ -1,0 +1,49 @@
+SLIDES LINK="https://petal-estimate-4e9.notion.site/Authentincation-a4b43c7cc1d14535a7b5b366080095fa";
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+1. Auth Basics
+link="https://petal-estimate-4e9.notion.site/Context-4fdd25b2ab9f4f28b195800095a88431";
+
+ • Every time you signup in facebook.com it returns you a token 
+ • this token is kept by your browser so that every time yu visite facebok.com if not logged out you'll enter easily andn get only your data
+ • once you steal this token form your friends pc and send a req by postman to facebook you can log in his account
+
+ => LEARNING: Token needs to be safe by all means!
+ Auth workflow example="https://petal-estimate-4e9.notion.site/Auth-workflow-Bank-example-0b8dbdd211a94af39945b390b06cf74a";
+
+ #CREATING AN EXPRESS APP
+ 
+ MADE PROJECT AS AUTH
+
+
+ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ JWT=> JSON WEB TOKENS!
+
+ • okaay so rn what tokens do is, they are just some random string provided to the user on a single username and password
+ • problem is evry time user log in ,it has to send the token by confirming via DB that whether this user is registered or not!
+ •  We can easily hop this loop by using JWT
+ •  JWT ❌(encrypt) .. encode✅the username and make token out of it and sends it to user
+ •  so every time user hits the server using token, server decodes it and gets logs in via username and saves one step here
+ •  TOKENS are stateful(need to store somewhere) probably in the DB!
+
+ LINK="https://petal-estimate-4e9.notion.site/JWTs-2b8faca349014dc7868bfe6f8df54a17"
+
+QUICK QUES?
+ • You still have to hit your DB with the decoded usernme and password for Authentincation?
+ A: 
+  • you signup IN website your username and password get registered in DB
+   • YOU SIGNIN in website it goes to DB and you get a JWT for the first time!
+    • JWT Stores only the username of user and not the password
+      • again you try to signin , but now with JWT the BE will understand since this user had the password earlier and decodes the JWT
+        in username and ....................................
+        
+        
+
+  MADE FILES IN JWT!
+
+
+
+
+
