@@ -1,7 +1,8 @@
 
 //classes
 //**promises is also a class that's why we are learning it here!!!! */
-// In JS cLASSES are a way to define blueprint  for creating objects
+// 
+// ng objects
 
 class Rectangle{
     constructor(width,height) {                             //constructor is a  keyword, would come in every class
@@ -52,8 +53,8 @@ console.log(p);                                         //here we see promise is
 
 //assignmemt:                                                          //callback hell
 //print hello world 1 after 1sec.
-//after it print hello world 2 after 2sec;
-//after it print hello world 3 after 6 sec; 
+//after it ,print "hello world 2: after 2sec;
+//after it, print "hello world 3" after 6 sec; 
 setTimeout(()=>{                                                        //nested Settimeout
     console.log("hi there 1");                                        
     setTimeout(()=>{
@@ -66,7 +67,7 @@ setTimeout(()=>{                                                        //nested
 
 //in order to avoid callback hell to occur PROISES CAME INTO PICTURE!!
 
-function promisifiedTimeout(timeout) {                    //creating our own promises might learn more later on 
+function promisifiedTimeout(timeout) {                    //creating our own promises, might learn more later on 
     return new Promise((resolve,reject)=>{
         setTimeout(()=>{
             resolve();

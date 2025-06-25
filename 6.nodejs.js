@@ -3,7 +3,7 @@
 // (LIBRARAY?)......PROGRAMMING LANG??......TECHNNOLOGY?? .......FRAMEWORK..??           NONEOFTHEM
 
 //IT IS  A RUNTIME ENVIRONMENT
-// its most like backend in JS ko run krne ke liye we need node AND node provides us the environment to run and
+// its most like backend in JS ko run krne ke liye we need node. AND node provides us the environment to run and
 // exxecute code in backend
 
 //after installing npm and node successfully
