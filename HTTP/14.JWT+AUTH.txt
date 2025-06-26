@@ -36,12 +36,22 @@ QUICK QUES?
   • you signup IN website your username and password get registered in DB
    • YOU SIGNIN in website it goes to DB and you get a JWT for the first time!
     • JWT Stores only the username of user and not the password
-      • again you try to signin , but now with JWT the BE will understand since this user had the password earlier and decodes the JWT
-        in username and ....................................
+      • again you try to signin , but now with JWT the BE will understand since now you will be verified by jwt.verify 
+       • JWT will use its JWT_SECRET AND get to know ki haa mene hi bnaya tha ,, LET IT ENTER!!
         
         
 
   MADE FILES IN JWT!
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+  QUICK QUES?
+  • If anyone can decode the JWT after encoding any browser webiste can decode it then how is it safe??
+  bcz no matter if you decode it to original format the key will be needed to verify whether the token was made by the admin or not
+  if you dont have the key you cant verify/authorize it !
+  hence the decoding means not much value /use for you!
+
+Understand more about this here:-"https://petal-estimate-4e9.notion.site/JWTs-can-be-DECODED-by-anyone-2a692e79606944b3b03f51bb5e899a73"
+
 
 
 
