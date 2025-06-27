@@ -6,15 +6,30 @@ const JWT_SECRET="randommsecretstringorwhat";                           //THIS I
 
 app.use(express.json());                      
 
+function auth(req,res,next){
+  var token=req.header['token'];
+  var decodedtoken=jwt.verify(token,JWT_SECRET)
+  if(decodedtoken.username){                                            
+    req.username=decodedtoken.username;                                //this is how whose username user has put in is being told to the other routes!
+    next()
+  }
+  else{
+    res.json({
+     msg:"you are not loggged in "   
+    }
+    )
+  }
+}
+
 var users=[];    
 
 //NO NEED FOR ENCRYPTION/DECRYPTION OURSELVES 
 //INSTALLED   "npm install jsonwebtoken"
 
 
-app.post('/signup',(req,res)=>{   
-    const username=req.body.username;
-    const password=req.body.password;
+app.post('/signup',(req,res)=>{                                        //creating an auth middleware at every route!
+    var username=req.body.username;
+    var password=req.body.password;
 
     users.push({
         username:username,
@@ -26,6 +41,7 @@ app.post('/signup',(req,res)=>{
     })
     console.log(users);
 })
+
 
 app.post('/signin',(req,res)=>{
     const username=req.body.username;
@@ -40,8 +56,11 @@ app.post('/signin',(req,res)=>{
                 username:username                                                      ///convert username to JWT
             },JWT_SECRET);
             // foundUser.token=token;                                               //since JWT is a stateless token we dont have to store it in any variable now
+            res.header("JWT",token);                                                //sending token in the headers
+            res.header("random","anythingjibrish")                                  //same here 
             res.json({
-                token:token
+                token:token,
+                msg:"user identified successfully"
             })
         }else{
             res.status(403).send({
@@ -52,18 +71,18 @@ app.post('/signin',(req,res)=>{
    })
 
 //IN POSTMAN add your token(generallly known as authorization) in the headers and not in the body since a thousand of req would be going out and you dont wanna put your token in each for each endpoint to identify you propely!   
-app.get("/me",(req,res)=>{                                                           //creating an AUTHENICATION ENDPOINT
-    const token=req.headers.token       
-    const decodedtoken=jwt.verify(token,JWT_SECRET);                                  //{username:"akshat@gmail.com"}
-    const username =decodedtoken.username
+app.get("/me",auth,(req,res)=>{                                                           //creating an AUTHENICATION ENDPOINT
+    // const token=req.headers.token                                ||not used cz created auth middlware
+    // const decodedtoken=jwt.verify(token,JWT_SECRET);             ||                     //{username:"akshat@gmail.com"}
+    // const username =decodedtoken.username                        ||
 
 
     //if we needed only username we would have done res.send(username ) and done!
-    // but since we need password as well we need to hit the database!
+    // but since we need password as well we need to hit the database! though that's mostly not the case we dont store pass in JWT
 
     let foundUser=null;                                                                                            
     for (let i=0;i<users.length;i++){                                                  //looping to find the user in DB
-        if(users[i].username==username){
+        if(users[i].username==req.username){                                            //takiing back from req middlewared!
           foundUser=users[i]; 
         }
     }
