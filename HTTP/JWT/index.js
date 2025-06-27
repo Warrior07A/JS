@@ -6,9 +6,19 @@ const JWT_SECRET="randommsecretstringorwhat";                           //THIS I
 
 app.use(express.json());                      
 
+
+app.use(logger)
+
+function logger(req,res,next){                                              // a simple middleware used to log method of incoming requests!
+    console.log(req.method+"method is being used")
+    next();
+}
+
+
 function auth(req,res,next){
-  var token=req.header['token'];
-  var decodedtoken=jwt.verify(token,JWT_SECRET)
+  var token=req.headers.token;                                              //its [headers] not header❌❌
+  var decodedtoken=jwt.verify(token,JWT_SECRET);
+
   if(decodedtoken.username){                                            
     req.username=decodedtoken.username;                                //this is how whose username user has put in is being told to the other routes!
     next()
@@ -79,10 +89,10 @@ app.get("/me",auth,(req,res)=>{                                                 
 
     //if we needed only username we would have done res.send(username ) and done!
     // but since we need password as well we need to hit the database! though that's mostly not the case we dont store pass in JWT
-
+    console.log(req.header);
     let foundUser=null;                                                                                            
-    for (let i=0;i<users.length;i++){                                                  //looping to find the user in DB
-        if(users[i].username==req.username){                                            //takiing back from req middlewared!
+    for (let i=0 ; i < users.length ; i++){                                                  //looping to find the user in DB
+        if(users[i].username === req.username){                                            //takiing back from req middlewared!
           foundUser=users[i]; 
         }
     }
