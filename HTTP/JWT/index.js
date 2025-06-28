@@ -69,7 +69,7 @@ app.post('/signin',(req,res)=>{
             res.header("JWT",token);                                                //sending token in the headers
             res.header("random","anythingjibrish")                                  //same here 
             res.json({
-                token:token,
+                token:token,                                                        //sending token via mssg
                 msg:"user identified successfully"
             })
         }else{

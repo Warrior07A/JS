@@ -58,4 +58,4 @@ added changes in JWT as auth middleware!
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-after that made full stack project as SignInAUTH IN projects!
+after that made full stack project as BE TO FE 

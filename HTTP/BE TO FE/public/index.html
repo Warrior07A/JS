@@ -1,0 +1,72 @@
+<!-- <frontend notioon doc="https://petal-estimate-4e9.notion.site/Writing-the-frontend-for-it-427523a4a66849af8e63436f25ce941f"></frontend> -->
+
+
+<center><body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+    <div>
+        <H1>SIGNUP</H1>
+        <input id="signup-username" type="text" name="username" placeholder="Username">
+        <input id="signup-password" type="password" name ="password" placeholder="Password">
+        <button onclick="signup()">Submit</button>
+    </div>
+    <div>
+        <H1>SIGNIN</H1>
+        <input id="signin-username" type="text" name="username" placeholder="enter email">
+        <input id="signin-password" type="password" name ="password" placeholder="enter password">
+        <button onclick="signin()">SUBMIT</button>
+    </div>
+    <div>
+        <H3>USER INFORMATION:</H3>
+        <div id ="INFORMATION">
+
+        </div>
+        <div>
+        <button onclick="logout()">Log Out</button>
+        </div>
+    </div>
+</body>
+</center>
+
+<script>
+
+async function signup(){
+    const username=document.getElementById("signup-username").value
+    const password=document.getElementById("signup-password").value
+    await axios.post("/signup",{                                                             //got an error when used "http://localhost:3000/signup"
+        username:username,
+        password:password
+    })
+    alert("you have been logged in ")
+}
+
+async function signin(){
+    const username=document.getElementById("signin-username").value
+    const password=document.getElementById("signin-password").value
+    const response=await axios.post("/signin",{
+        username:username,
+        password:password
+    })
+    localStorage.setItem("token",response.data.token)                                       //storing the data in localstorage of browser! as token header
+    alert("you have been signed in");
+}
+
+async function UserInformation(){
+    const response=await axios.get("/me",{
+        headers:{
+            token:localStorage.getItem("token")
+        }
+    })
+    document.getElementById("INFORMATION").innerHTML="username"+ response.data.username + "password: " +response.data.password
+}
+
+UserInformation();                                                     
+//calling the UserInfo fn when the page loads
+//after signin if you'll refresh the page this script will load and hence you'll get the updated or the most recent data in the information div!
+
+
+
+
+
+
+</script>
+
