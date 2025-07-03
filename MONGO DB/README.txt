@@ -12,3 +12,11 @@ THEN,
 
 • what is a cluster?
 A bunch of machines holding our data are called CLUSTERS
+
+
+QUES: what is the differneve between NOSQL AND SQL?
+
+    NOSQL is (Schema less)
+    SQL (Needs Schema to be defined)
+    Then why did we defined schema in mongo here??        We need the data schema to be strict and follow a certain order that's why we used mongooose
+                                                            IF we use mongodb we dont need a schema 

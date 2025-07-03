@@ -5,7 +5,7 @@ const mongoose=require("mongoose");
 const jwt=require("jsonwebtoken");
 const JWT_SECRET="ITSSECRET";
 
-mongoose.connect("mongodb+srv://Warrior07A:5bglU72b85qpC15G@cluster0.ru0uizx.mongodb.net/todo")   //after cluster name /todo (name of db )if not creates a new one
+mongoose.connect("mongodb+srv://Warrior07A:fsaXmSchnThTIhBZ@cluster0.ru0uizx.mongodb.net/todo")   //after cluster name /todo (name of db )if not creates a new one
 app.use(express.json());
 
 
@@ -51,18 +51,28 @@ app.post("/signin",async function(req,res){
     }
 })
 
-app.post("/todo",auth,(req,res)=>{
-    const userid=req.userID;
+app.post("/todo",auth,async function(req,res){                                  //creating a new todo for the user!
+    const userID=req.userID;
+    const title=req.body.title;
+    await Todomodel.create({
+        title:title,
+        userID:userID
+    })
+
     res.json({
-        userid:userid
+        msg:"todo created"                                                    
     })
 
 })
 
-app.post("/todos",(req,res)=>{
-     const userid=req.userID;
+app.get("/todos",auth,async function (req,res) {                                     //accessing all the user in a go
+     const userID=req.userID;                                                   //its returning the userID now you can access its personalised todo
+     const todos=await Todomodel.find({
+        userID:userID
+        
+     })
       res.json({
-        userid:userid
+        todos
     })
 
 })
@@ -71,7 +81,7 @@ async function auth(req,res,next){
     const token=req.headers.token;
     const decodedtoken=jwt.verify(token,JWT_SECRET);
     if (decodedtoken){
-        req.userID=decodedtoken.id
+        req.userID=decodedtoken.id                                                              //after getting decoded you'r getting id✅ _id❌
         next()
     }else{
         res.status(403).json({
