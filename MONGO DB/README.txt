@@ -45,3 +45,27 @@ QUES: what is the differneve between NOSQL AND SQL?
     //now both the person password might be the same but the salt would be differnt(randomly generated) and hence hash won't be same!
     //check IMAGES/image.png
      
+
+// 2. HANDLING ERRORS/EXCEPTIONS
+
+    //it is all about using try catch block and log the error to prevent crashing the server !  
+    //if you think a code is going to throw an error put it in try catch block
+
+
+// 3. INPUT VALIDATION
+    //you expect the user to send you the username and password in specified datatypes only butthe user not always do the same
+    //he may send an array or an complex object or anything 
+    //DO INPUT VALIDATION:- whther username is string or not ?
+
+
+    we can add
+    if (typeof email!=="string" || email.length<5 || !email.includes("@){
+        res.json({
+            mssg:"EMAIL INCORRECT"
+        })
+        return
+    })
+    //this   or we can alternatively use library for checking mails just like i did there 
+
+    //one of such libraries is "ZOD"
+    //use npm install ZOD

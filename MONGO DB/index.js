@@ -5,26 +5,50 @@ const mongoose=require("mongoose");
 const jwt=require("jsonwebtoken");
 const JWT_SECRET="ITSSECRET";
 const bcrypt=require("bcrypt");
+const {z} =require ("zod");
 
-mongoose.connect("")   //after cluster name /todo (name of db )if not creates a new one
+
+mongoose.connect("mongodb+srv://Warrior07A:fsaXmSchnThTIhBZ@cluster0.ru0uizx.mongodb.net/todo   ")   //after cluster name /todo (name of db )if not creates a new one
 app.use(express.json());
 
-
-app.post("/signup",async function(req,res){                                             //since creation of data to mongodb server takes some time
+let Throwerror=false;
+app.post("/signup",async function(req,res){                                            //since creation of data to mongodb server takes some time
+    try{                                        
+        const requiredbody=z.object({                                               //whatever we have to validate just make a schema for that
+            email:z.string().min(3).max(100).email(),
+            password:z.string().min(3).max(100),
+            name:z.name().min(3).max(100)
+                })
+        const parsdDatawithsuccess=requiredbody.safeParse(req.body);
+        
+        if(!parsdDatawithsuccess){
+            res.json({
+                msg:"incorrect format"
+            })
+            return
+        }
+    
     const email=req.body.email;
     const password=req.body.password;
     const name=req.body.name;
     const hashedpassword= await  bcrypt.hash(password,10);                              //hashing password and storing hash in DB
-    console.log(hashedpassword);
+    s
     await Usermodel.create({
         email:email,
         name:name,
         password:hashedpassword
         
-    })
-    res.json({
+    })}catch(e){
+        res.json({
+            msg:"An ERROR Occured. Please check your creds !"})
+            Throwerror=true;
+    }
+    if(!Throwerror){
+        res.json({
         msg:"you have been signed up"
     })
+    }
+    
 
 })
 
@@ -42,11 +66,8 @@ app.post("/signin",async function(req,res){
         })
         return;
     }
-
-    const passwordmatch=bcrypt.compare(password,user.password);
-
-
- console.log(user)
+    const passwordmatch=await bcrypt.compare(password,user.password);               //make sure to make it "AWAIT" or it'll approve all passwords
+    console.log(user)
 
     if (passwordmatch){
         const token=jwt.sign({
