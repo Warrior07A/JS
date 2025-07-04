@@ -15,8 +15,8 @@ const Todo=new Schema({
     done:Boolean,
     userID:ObjectId
 })
-
-const Usermodel=mongoose.model("users",User);                                    //creates a new database of the user in users db with schema User
+                        // where it Is going in DB, SCHEMA USED
+const Usermodel=mongoose.model("users",User);                                    //creates a new database of the user in "users" db with schema "User"
 const Todomodel=mongoose.model("todo",Todo);                                     //model does that work to create
 
 
