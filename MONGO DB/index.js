@@ -13,44 +13,54 @@ app.use(express.json());
 
 let Throwerror=false;
 app.post("/signup",async function(req,res){                                            //since creation of data to mongodb server takes some time
-    try{                                        
-        const requiredbody=z.object({                                               //whatever we have to validate just make a schema for that
+    // try{                                        
+        const requiredbody=z.object({                                               //whatever we have to validate just make a schema for that in zod
             email:z.string().min(3).max(100).email(),
             password:z.string().min(3).max(100),
-            name:z.name().min(3).max(100)
+            name:z.string().min(3).max(100)
                 })
-        const parsdDatawithsuccess=requiredbody.safeParse(req.body);
+        const parsdDatawithsuccess=requiredbody.safeParse(req.body);                //it will let us know if there's an error in user's input(safely goes through each zod validation above)
+
         
-        if(!parsdDatawithsuccess){
+        if(!parsdDatawithsuccess.success){
             res.json({
-                msg:"incorrect format"
+                msg:"incorrect format",
+                error:parsdDatawithsuccess.error                                    //prints complete inforamton about the error in frontend !
             })
             return
         }
+        if(parsdDatawithsuccess.success){
+        res.json({
+            msg:"you have been signedup"
+        })
+}
     
     const email=req.body.email;
     const password=req.body.password;
     const name=req.body.name;
     const hashedpassword= await  bcrypt.hash(password,10);                              //hashing password and storing hash in DB
-    s
+    
     await Usermodel.create({
         email:email,
         name:name,
         password:hashedpassword
         
-    })}catch(e){
-        res.json({
-            msg:"An ERROR Occured. Please check your creds !"})
-            Throwerror=true;
-    }
-    if(!Throwerror){
-        res.json({
-        msg:"you have been signed up"
-    })
-    }
+    })}
+    // catch(e){
+    //     res.json({
+    //         msg:"An ERROR Occured. Please check your creds !"})
+    //         Throwerror=true;
+    // }
+    // if(!Throwerror){
+    //     res.json({
+    //     msg:"you have been signed up"
+    // })
+    // }
     
 
-})
+// }
+
+)
 
 app.post("/signin",async function(req,res){
     const email=req.body.email;
