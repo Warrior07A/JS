@@ -8,7 +8,7 @@ const bcrypt=require("bcrypt");
 const {z} =require ("zod");
 
 
-mongoose.connect("mongodb+srv://Warrior07A:fsaXmSchnThTIhBZ@cluster0.ru0uizx.mongodb.net/todo   ")   //after cluster name /todo (name of db )if not creates a new one
+mongoose.connect("   ")   //after cluster name /todo (name of db )if not creates a new one
 app.use(express.json());
 
 let Throwerror=false;
